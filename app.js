@@ -10,8 +10,8 @@
 // 5. Settings > API Keys > X-Master-Key'i kopyala
 // 6. Aşağıdaki değerleri değiştir:
 
-const JSONBIN_BIN_ID = 'YOUR_BIN_ID'; // Örnek: 6761234567890abcdef
-const JSONBIN_API_KEY = 'YOUR_API_KEY'; // Örnek: $2a$10$xxxxx...
+const JSONBIN_BIN_ID = '69415097d0ea881f402d4399';
+const JSONBIN_API_KEY = '$2a$10$KePvmsYVd/cenj6JV0nsRuBdNxXBRA4FRooCgUw05DfDD2vlwGQMK';
 
 // Test modu - JSONBin kurulmadan önce localStorage kullanır
 const USE_LOCAL_STORAGE = JSONBIN_BIN_ID === 'YOUR_BIN_ID';
