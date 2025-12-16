@@ -264,7 +264,6 @@ async function loadMessages() {
             return `
                 <div class="message-card" style="animation-delay: ${index * 0.1}s" data-id="${msg.id}">
                     <div class="message-number">#${messages.length - index}</div>
-                    <button class="delete-btn" onclick="deleteMessage('${msg.id}')" title="Mesajı Sil">🗑️</button>
                     <div class="message-content">${escapeHtml(msg.message)}</div>
                     ${msg.hint ? `
                         <div class="message-hint">
@@ -273,7 +272,10 @@ async function loadMessages() {
                         </div>
                     ` : ''}
                     <div class="message-footer">
-                        <span class="message-time">🕐 ${timeStr} • ${dateStr}</span>
+                        <div class="message-meta">
+                            <span class="message-time">🕐 ${timeStr} • ${dateStr}</span>
+                            <button class="delete-btn" onclick="deleteMessage('${msg.id}')" title="Mesajı sil">🗑️</button>
+                        </div>
                         <div class="guess-section">
                             ${msg.guessedBy ? `
                                 <div class="guessed-name">
