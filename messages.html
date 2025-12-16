@@ -287,6 +287,33 @@
                 font-size: 0.95rem;
             }
         }
+
+        /* DELETE BUTTON - MESAJ SILME */
+        .delete-btn {
+            position: absolute !important;
+            top: 15px !important;
+            left: 15px !important;
+            width: 42px !important;
+            height: 42px !important;
+            background: linear-gradient(135deg, #ff5252 0%, #d32f2f 100%) !important;
+            border: none !important;
+            border-radius: 12px !important;
+            cursor: pointer !important;
+            font-size: 1.2rem !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            opacity: 1 !important;
+            box-shadow: 0 4px 15px rgba(255, 82, 82, 0.5) !important;
+            z-index: 100 !important;
+            transition: all 0.3s ease !important;
+        }
+
+        .delete-btn:hover {
+            background: linear-gradient(135deg, #ff1744 0%, #b71c1c 100%) !important;
+            transform: scale(1.15) !important;
+            box-shadow: 0 6px 25px rgba(255, 82, 82, 0.7) !important;
+        }
     </style>
 </head>
 <body class="messages-page">
