@@ -8,24 +8,260 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+    <style>
+        /* LOGIN PAGE STYLES */
+        .login-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            padding: 20px;
+            overflow: hidden;
+        }
+
+        .login-modal::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(255, 107, 157, 0.2) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(124, 77, 255, 0.2) 0%, transparent 50%),
+                radial-gradient(circle at 50% 50%, rgba(255, 171, 64, 0.1) 0%, transparent 40%);
+            animation: bgFloat 15s ease-in-out infinite;
+        }
+
+        @keyframes bgFloat {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            50% { transform: translate(30px, -30px) rotate(10deg); }
+        }
+
+        .floating-hearts {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .login-box {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 30px;
+            padding: 50px 45px;
+            max-width: 400px;
+            width: 100%;
+            text-align: center;
+            animation: boxAppear 0.6s ease-out;
+            box-shadow: 
+                0 25px 60px rgba(0, 0, 0, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+            position: relative;
+            z-index: 10;
+        }
+
+        .login-box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #ff6b9d, #7c4dff, #ffab40, #ff6b9d);
+            background-size: 300% 100%;
+            border-radius: 30px 30px 0 0;
+            animation: gradient 3s linear infinite;
+        }
+
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 300% 50%; }
+        }
+
+        @keyframes boxAppear {
+            from {
+                opacity: 0;
+                transform: scale(0.9) translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+
+        .login-icon {
+            font-size: 80px;
+            margin-bottom: 20px;
+            display: block;
+            animation: iconBounce 2s ease-in-out infinite;
+            filter: drop-shadow(0 10px 20px rgba(255, 107, 157, 0.3));
+        }
+
+        @keyframes iconBounce {
+            0%, 100% { transform: translateY(0) scale(1); }
+            50% { transform: translateY(-10px) scale(1.05); }
+        }
+
+        .login-box h2 {
+            font-family: 'Pacifico', cursive;
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, #ff6b9d, #ffab40, #7c4dff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin: 0 0 10px 0;
+        }
+
+        .login-box > p {
+            color: rgba(255, 255, 255, 0.8);
+            margin: 0 0 35px 0;
+            font-size: 1.1rem;
+            font-family: 'Quicksand', sans-serif;
+        }
+
+        #loginForm {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        #loginPassword {
+            width: 100%;
+            padding: 20px 25px;
+            font-size: 1.1rem;
+            font-family: 'Quicksand', sans-serif;
+            font-weight: 600;
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: 16px;
+            color: #fff;
+            text-align: center;
+            transition: all 0.3s ease;
+            outline: none;
+            box-sizing: border-box;
+        }
+
+        #loginPassword:focus {
+            border-color: #ff6b9d;
+            background: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 0 0 4px rgba(255, 107, 157, 0.2);
+        }
+
+        #loginPassword::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .login-btn {
+            width: 100%;
+            padding: 20px 30px;
+            font-size: 1.15rem;
+            font-weight: 700;
+            font-family: 'Quicksand', sans-serif;
+            background: linear-gradient(135deg, #ff6b9d 0%, #e91e63 100%);
+            border: none;
+            border-radius: 16px;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(255, 107, 157, 0.4);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .login-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(255, 107, 157, 0.5);
+            background: linear-gradient(135deg, #ff85b1 0%, #f50057 100%);
+        }
+
+        .login-btn:active {
+            transform: translateY(-1px);
+        }
+
+        .login-error {
+            color: #ff5252;
+            font-weight: 700;
+            margin: 15px 0 0 0;
+            padding: 15px;
+            background: rgba(255, 82, 82, 0.15);
+            border-radius: 12px;
+            font-family: 'Quicksand', sans-serif;
+            animation: shake 0.5s ease-out;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-10px); }
+            75% { transform: translateX(10px); }
+        }
+
+        .back-to-home {
+            display: inline-block;
+            margin-top: 30px;
+            color: rgba(255, 255, 255, 0.6);
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-family: 'Quicksand', sans-serif;
+            font-weight: 600;
+            padding: 12px 25px;
+            border-radius: 25px;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .back-to-home:hover {
+            color: #fff;
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateX(-5px);
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        @media (max-width: 500px) {
+            .login-box {
+                padding: 40px 30px;
+                margin: 15px;
+            }
+            .login-icon {
+                font-size: 60px;
+            }
+            .login-box h2 {
+                font-size: 2rem;
+            }
+        }
+    </style>
 </head>
 <body class="messages-page">
     <!-- LOGIN MODAL -->
     <div id="loginModal" class="login-modal">
         <div class="floating-hearts" id="floatingHearts"></div>
         <div class="login-box">
-            <div class="login-icon">🎂</div>
+            <span class="login-icon">🎂</span>
             <h2>Gizli Alan!</h2>
             <p>Bu sayfa sadece doğum günü çocuğu için 💝</p>
             <form id="loginForm">
                 <input 
                     type="password" 
                     id="loginPassword" 
-                    placeholder="✨ Şifreyi gir ✨"
+                    placeholder="🔑 Şifreyi gir..."
                     autocomplete="off"
                     required
                 >
-                <button type="submit" class="login-btn">🔓 Giriş Yap</button>
+                <button type="submit" class="login-btn">🎉 Giriş Yap</button>
             </form>
             <p id="loginError" class="login-error hidden">Yanlış şifre! Tekrar dene 🙈</p>
             <a href="index.html" class="back-to-home">← Ana Sayfaya Dön</a>
