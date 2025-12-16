@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎁 Sana Gelen Mesajlar!</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="messages-page">
+    <div class="background-shapes">
+        <div class="shape shape-1"></div>
+        <div class="shape shape-2"></div>
+        <div class="shape shape-3"></div>
+        <div class="shape shape-4"></div>
+        <div class="shape shape-5"></div>
+    </div>
+    
+    <div class="confetti-container" id="confetti"></div>
+    
+    <main class="container">
+        <header class="header">
+            <div class="cake-icon">🎉</div>
+            <h1 class="title">Doğum Günün Kutlu Olsun!</h1>
+            <p class="subtitle">Sana gelen anonim mesajlar burada! Kim yazmış tahmin et! 🕵️</p>
+        </header>
+
+        <section class="messages-section">
+            <div id="loading" class="loading">
+                <div class="loading-spinner"></div>
+                <p>Mesajlar yükleniyor...</p>
+            </div>
+            
+            <div id="noMessages" class="no-messages hidden">
+                <div class="empty-icon">📭</div>
+                <p>Henüz mesaj yok, biraz bekle!</p>
+            </div>
+
+            <div id="messagesContainer" class="messages-grid"></div>
+        </section>
+
+        <div class="stats-bar" id="statsBar">
+            <div class="stat">
+                <span class="stat-number" id="totalMessages">0</span>
+                <span class="stat-label">Mesaj</span>
+            </div>
+            <div class="stat">
+                <span class="stat-number" id="guessedCount">0</span>
+                <span class="stat-label">Tahmin Edildi</span>
+            </div>
+        </div>
+
+        <footer class="footer">
+            <a href="index.html" class="back-link">← Mesaj Bırakma Sayfasına Dön</a>
+        </footer>
+    </main>
+
+    <script src="app.js"></script>
+    <script>
+        // Sayfa yüklendiğinde mesajları getir
+        document.addEventListener('DOMContentLoaded', () => {
+            loadMessages();
+            // Her 10 saniyede bir yeni mesajları kontrol et
+            setInterval(loadMessages, 10000);
+        });
+    </script>
+</body>
+</html>
+
