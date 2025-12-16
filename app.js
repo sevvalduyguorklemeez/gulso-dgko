@@ -191,6 +191,38 @@ async function updateMessageGuess(messageId, guessedBy) {
     }
 }
 
+// Mesaj silme fonksiyonu
+async function deleteMessage(messageId) {
+    if (!confirm('Bu mesajı silmek istediğine emin misin?')) return;
+    
+    try {
+        if (USE_LOCAL_STORAGE) {
+            const messages = JSON.parse(localStorage.getItem('birthdayMessages') || '[]');
+            const filtered = messages.filter(m => m.id !== messageId);
+            localStorage.setItem('birthdayMessages', JSON.stringify(filtered));
+        } else {
+            const messages = await getMessages();
+            const filtered = messages.filter(m => m.id !== messageId);
+            
+            const response = await fetch(`https://api.jsonbin.io/v3/b/${JSONBIN_BIN_ID}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-Master-Key': JSONBIN_API_KEY
+                },
+                body: JSON.stringify(filtered)
+            });
+            
+            if (!response.ok) throw new Error('API Error');
+        }
+        
+        loadMessages(); // Sayfayı yenile
+    } catch (error) {
+        console.error('Mesaj silinemedi:', error);
+        alert('Mesaj silinemedi, tekrar deneyin.');
+    }
+}
+
 // ========================================
 // MESAJLARI GÖRÜNTÜLEME
 // ========================================
@@ -232,6 +264,7 @@ async function loadMessages() {
             return `
                 <div class="message-card" style="animation-delay: ${index * 0.1}s" data-id="${msg.id}">
                     <div class="message-number">#${messages.length - index}</div>
+                    <button class="delete-btn" onclick="deleteMessage('${msg.id}')" title="Mesajı Sil">🗑️</button>
                     <div class="message-content">${escapeHtml(msg.message)}</div>
                     ${msg.hint ? `
                         <div class="message-hint">
