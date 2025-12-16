@@ -10,6 +10,27 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body class="messages-page">
+    <!-- LOGIN MODAL -->
+    <div id="loginModal" class="login-modal">
+        <div class="login-box">
+            <div class="login-icon">🔐</div>
+            <h2>Gizli Alan!</h2>
+            <p>Bu sayfa sadece doğum günü çocuğu için 🎂</p>
+            <form id="loginForm">
+                <input 
+                    type="password" 
+                    id="loginPassword" 
+                    placeholder="Şifreyi gir..."
+                    autocomplete="off"
+                    required
+                >
+                <button type="submit" class="login-btn">Giriş Yap ✨</button>
+            </form>
+            <p id="loginError" class="login-error hidden">Yanlış şifre! 🙈</p>
+            <a href="index.html" class="back-to-home">← Ana Sayfaya Dön</a>
+        </div>
+    </div>
+
     <div class="background-shapes">
         <div class="shape shape-1"></div>
         <div class="shape shape-2"></div>
@@ -20,7 +41,7 @@
     
     <div class="confetti-container" id="confetti"></div>
     
-    <main class="container">
+    <main class="container hidden" id="mainContent">
         <header class="header">
             <div class="cake-icon">🎉</div>
             <h1 class="title">Doğum Günün Kutlu Olsun!</h1>
@@ -59,12 +80,44 @@
 
     <script src="app.js"></script>
     <script>
-        // Sayfa yüklendiğinde mesajları getir
+        // Admin şifresi - bunu istediğin gibi değiştirebilirsin
+        const ADMIN_PASSWORD = 'gulso';
+        
+        // Login kontrolü
         document.addEventListener('DOMContentLoaded', () => {
-            loadMessages();
-            // Her 10 saniyede bir yeni mesajları kontrol et
-            setInterval(loadMessages, 10000);
+            const isLoggedIn = sessionStorage.getItem('adminLoggedIn');
+            
+            if (isLoggedIn === 'true') {
+                showMessages();
+            }
         });
+        
+        // Login formu
+        document.getElementById('loginForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const password = document.getElementById('loginPassword').value;
+            
+            if (password.toLowerCase() === ADMIN_PASSWORD.toLowerCase()) {
+                sessionStorage.setItem('adminLoggedIn', 'true');
+                showMessages();
+            } else {
+                document.getElementById('loginError').classList.remove('hidden');
+                document.getElementById('loginPassword').value = '';
+                document.getElementById('loginPassword').style.borderColor = '#ff5252';
+                setTimeout(() => {
+                    document.getElementById('loginError').classList.add('hidden');
+                    document.getElementById('loginPassword').style.borderColor = '';
+                }, 2000);
+            }
+        });
+        
+        function showMessages() {
+            document.getElementById('loginModal').classList.add('hidden');
+            document.getElementById('mainContent').classList.remove('hidden');
+            loadMessages();
+            setInterval(loadMessages, 10000);
+            createConfetti();
+        }
     </script>
 </body>
 </html>
