@@ -729,25 +729,88 @@ body {
    RESPONSIVE
    ======================================== */
 
-@media (max-width: 600px) {
+/* ========================================
+   RESPONSIVE - TABLET
+   ======================================== */
+
+@media (max-width: 768px) {
     .container {
-        padding: 30px 15px;
+        padding: 30px 20px;
     }
     
     .title {
-        font-size: 2.5rem;
-    }
-    
-    .subtitle {
-        font-size: 1rem;
+        font-size: 2.8rem;
     }
     
     .message-form {
-        padding: 25px;
+        padding: 30px;
+    }
+    
+    .stats-bar {
+        gap: 40px;
+    }
+}
+
+/* ========================================
+   RESPONSIVE - MOBILE
+   ======================================== */
+
+@media (max-width: 600px) {
+    .container {
+        padding: 25px 15px;
+    }
+    
+    .title {
+        font-size: 2.2rem;
+        line-height: 1.2;
+    }
+    
+    .subtitle {
+        font-size: 0.95rem;
+        padding: 0 10px;
+    }
+    
+    .message-form {
+        padding: 25px 20px;
+        border-radius: 20px;
     }
     
     .cake-icon {
-        font-size: 60px;
+        font-size: 55px;
+    }
+    
+    .header {
+        margin-bottom: 35px;
+    }
+    
+    .form-group label {
+        font-size: 1rem;
+    }
+    
+    .form-group textarea,
+    .form-group input {
+        padding: 15px;
+        font-size: 0.95rem;
+        border-radius: 12px;
+    }
+    
+    .form-group textarea {
+        height: 130px;
+    }
+    
+    .submit-btn {
+        padding: 16px 30px;
+        font-size: 1rem;
+        border-radius: 12px;
+    }
+    
+    .message-card {
+        padding: 22px;
+        border-radius: 16px;
+    }
+    
+    .message-content {
+        font-size: 1rem;
     }
     
     .message-footer {
@@ -758,19 +821,104 @@ body {
     
     .guess-section {
         width: 100%;
+        flex-direction: column;
     }
     
     .guess-input {
-        flex: 1;
+        width: 100%;
+    }
+    
+    .guess-btn {
+        width: 100%;
     }
     
     .stats-bar {
         gap: 30px;
-        padding: 20px;
+        padding: 20px 15px;
+        border-radius: 16px;
     }
     
     .stat-number {
-        font-size: 2rem;
+        font-size: 1.8rem;
+    }
+    
+    .stat-label {
+        font-size: 0.8rem;
+    }
+    
+    .success-message {
+        padding: 40px 25px;
+    }
+    
+    .success-icon {
+        font-size: 60px;
+    }
+    
+    .success-message h2 {
+        font-size: 1.6rem;
+    }
+    
+    .another-btn {
+        padding: 12px 28px;
+        font-size: 0.95rem;
+    }
+    
+    .secret-link,
+    .back-link {
+        font-size: 0.85rem;
+        padding: 10px 20px;
+    }
+    
+    .footer {
+        margin-top: 30px;
+    }
+}
+
+/* ========================================
+   RESPONSIVE - SMALL MOBILE
+   ======================================== */
+
+@media (max-width: 400px) {
+    .container {
+        padding: 20px 12px;
+    }
+    
+    .title {
+        font-size: 1.9rem;
+    }
+    
+    .subtitle {
+        font-size: 0.9rem;
+    }
+    
+    .cake-icon {
+        font-size: 45px;
+    }
+    
+    .message-form {
+        padding: 20px 15px;
+    }
+    
+    .form-group textarea,
+    .form-group input {
+        padding: 12px;
+    }
+    
+    .submit-btn {
+        padding: 14px 20px;
+        font-size: 0.95rem;
+    }
+    
+    .message-card {
+        padding: 18px;
+    }
+    
+    .message-number {
+        width: 30px;
+        height: 30px;
+        font-size: 0.8rem;
+        top: 15px;
+        right: 15px;
     }
 }
 
